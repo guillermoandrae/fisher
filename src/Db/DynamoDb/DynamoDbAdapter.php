@@ -29,8 +29,9 @@ final class DynamoDbAdapter implements AdapterInterface
     private $tableName;
 
     /**
-     * Registers the client and marshaler with this object. Sets up the Repository factory and passes the Marshaler
-     * over to the request factory as well.
+     * Registers the client and marshaler with this object. Sets up the
+     * Repository factory and passes the Marshaler over to the request factory
+     * as well.
      *
      * @param DynamoDbClient $client The DynamoDb client.
      * @param Marshaler $marshaler The JSON Marshaler.
@@ -69,7 +70,7 @@ final class DynamoDbAdapter implements AdapterInterface
     {
         try {
             $query = RequestFactory::factory('scan', $this->tableName)
-                ->setLimit(0, 1)
+                ->setLimit(1)
                 ->get();
             $results = $this->client->scan($query);
             return $this->marshaler->unmarshalItem($results['Item']);

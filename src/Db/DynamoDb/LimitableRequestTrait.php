@@ -5,7 +5,7 @@ namespace Guillermoandrae\Fisher\Db\DynamoDb;
 trait LimitableRequestTrait
 {
     protected $filterExpression;
-    protected $offset;
+        
     protected $limit;
 
     final public function setFilterExpression(array $data)
@@ -19,9 +19,8 @@ trait LimitableRequestTrait
         return $this;
     }
 
-    final public function setLimit(int $offset, int $limit)
+    final public function setLimit(int $limit)
     {
-        $this->offset = $offset;
         $this->limit = $limit;
         return $this;
     }

@@ -7,7 +7,8 @@ use Guillermoandrae\Common\CollectionInterface;
 interface AdapterInterface
 {
     /**
-     * Retrieves all of the rows in a table. When an offset and limit are provided, the desired slice is returned.
+     * Retrieves all of the rows in a database table. When an offset and limit 
+     * are provided, the desired slice is returned.
      *
      * @param integer $offset OPTIONAL The offset.
      * @param integer $limit OPTIONAL The limit.
@@ -17,7 +18,7 @@ interface AdapterInterface
     public function findAll(int $offset = 0, ?int $limit = null): CollectionInterface;
 
     /**
-     * Retrieves the newest record in a table.
+     * Retrieves the newest record from a database table.
      *
      * @return array The latest record.
      * @throws DbException Thrown when a query error occurs.
@@ -25,7 +26,7 @@ interface AdapterInterface
     public function findLatest(): array;
 
     /**
-     * Retrieves a record from a table by ID.
+     * Retrieves a record from a database table by ID.
      *
      * @param mixed $id Thew record ID.
      * @return array The record.
