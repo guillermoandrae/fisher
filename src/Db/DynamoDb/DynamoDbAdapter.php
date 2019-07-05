@@ -73,7 +73,7 @@ final class DynamoDbAdapter implements AdapterInterface
                 ->setLimit(1)
                 ->get();
             $results = $this->client->scan($query);
-            return $this->marshaler->unmarshalItem($results['Item']);
+            return $this->marshaler->unmarshalItem($results['Items'][0]);
         } catch (DynamoDbException $ex) {
             throw new DbException($ex->getMessage());
         }

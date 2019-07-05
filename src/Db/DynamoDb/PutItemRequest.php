@@ -39,7 +39,7 @@ final class PutItemRequest extends AbstractItemRequest
 
     /**
      * {@inheritDoc}
-     */    
+     */
     public function get(): array
     {
         return [

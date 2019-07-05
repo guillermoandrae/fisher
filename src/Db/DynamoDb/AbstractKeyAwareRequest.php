@@ -39,7 +39,7 @@ abstract class AbstractKeyAwareRequest extends AbstractItemRequest
 
     /**
      * {@inheritDoc}
-     */    
+     */
     public function get(): array
     {
         return [

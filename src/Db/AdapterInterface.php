@@ -7,7 +7,7 @@ use Guillermoandrae\Common\CollectionInterface;
 interface AdapterInterface
 {
     /**
-     * Retrieves all of the rows in a database table. When an offset and limit 
+     * Retrieves all of the rows in a database table. When an offset and limit
      * are provided, the desired slice is returned.
      *
      * @param integer $offset OPTIONAL The offset.

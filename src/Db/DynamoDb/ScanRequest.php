@@ -15,7 +15,7 @@ final class ScanRequest extends AbstractItemRequest
 
     /**
      * @var boolean Whether or not the read should be consistent.
-     */    
+     */
     private $consistentRead = false;
 
     /**
@@ -56,7 +56,7 @@ final class ScanRequest extends AbstractItemRequest
 
     /**
      * {@inheritDoc}
-     */    
+     */
     public function get(): array
     {
         $query = [

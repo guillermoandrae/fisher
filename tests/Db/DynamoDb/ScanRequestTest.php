@@ -11,7 +11,8 @@ final class ScanRequestTest extends TestCase
     public function testToArray()
     {
         $request = new ScanRequest(new Marshaler(), 'test');
-        $expectedQuery = ['TableName' => 'test', 'ScanIndexForward' => false, 'ConsistentRead' => false];
+        $request->setConsistentRead(true)->setScanIndexForward(true);
+        $expectedQuery = ['TableName' => 'test', 'ScanIndexForward' => true, 'ConsistentRead' => true];
         $this->assertSame($expectedQuery, $request->toArray());
     }
 }
