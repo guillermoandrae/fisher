@@ -1,0 +1,5 @@
+vendor
+clover.xml
+database
+shared-local-instance.db
+.phpunit.result.cache
