@@ -1,5 +1,14 @@
 language: php
-install: travis_wait composer start-local
+matrix:
+    include:
+        - php: 7.1
+        - php: 7.2
+        - php: nightly
+    allow_failures:
+        - php: nightly
+    fast_finish: true
+before_install:
+  - travis_wait composer start-local > /dev/null &
 script:
   - composer install --optimize-autoloader
   - composer test
