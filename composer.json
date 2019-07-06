@@ -38,10 +38,17 @@
             "@stop-local",
             "@start-local"
         ],
-        "test": [
+        "check-style": [
             "phpcbf --standard=PSR2 --extensions=php src tests",
-            "phpcs --standard=PSR2 --extensions=php src tests",
+            "phpcs --standard=PSR2 --extensions=php src tests"            
+        ],
+        "test": [
+            "@check-style",
             "phpunit --coverage-text --coverage-clover=./clover.xml"
+        ],
+        "test-html": [
+            "@check-style",
+            "phpunit --coverage-html report"
         ]
     }
 }
