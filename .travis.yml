@@ -1,0 +1,4 @@
+language: php
+script:
+- composer install --optimize-autoloader
+- composer test
