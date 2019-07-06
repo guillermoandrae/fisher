@@ -12,7 +12,7 @@ abstract class AbstractItemRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $returnConsumedCapacity = 'NONE';
+    protected $returnConsumedCapacity = ConsumedCapacityOptions::NONE;
 
     /**
      * Adds an ExpressionAttributeValue to the request.
@@ -23,7 +23,7 @@ abstract class AbstractItemRequest extends AbstractRequest
      */
     final public function addExpressionAttributeValue(string $key, string $value): AbstractItemRequest
     {
-        $this->expressionAttributeValues[] = [ sprintf(':%s', $key) => $value ];
+        $this->expressionAttributeValues[sprintf(':%s', $key)] = $this->marshaler->marshalValue($value);
         return $this;
     }
 

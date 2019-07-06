@@ -6,7 +6,6 @@ use Aws\DynamoDb\Marshaler;
 use PHPUnit\Framework\TestCase;
 use Guillermoandrae\Fisher\Db\DbException;
 use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
-use Aws\DynamoDb\DynamoDbClient;
 use GuillermoandraeTest\Fisher\LocalDynamoDbClient;
 
 final class DynamoDbAdapterTest extends TestCase
@@ -17,6 +16,12 @@ final class DynamoDbAdapterTest extends TestCase
     {
         $this->expectException(DbException::class);
         $this->adapter->useTable('test')->findAll();
+    }
+
+    public function testBadFindLatest()
+    {
+        $this->expectException(DbException::class);
+        $this->adapter->useTable('test')->findLatest();
     }
 
     public function testBadInsert()

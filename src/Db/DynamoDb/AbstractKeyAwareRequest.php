@@ -44,6 +44,7 @@ abstract class AbstractKeyAwareRequest extends AbstractItemRequest
     {
         return [
             'TableName' => $this->tableName,
+            'ReturnConsumedCapacity' => $this->returnConsumedCapacity,
             'Key' => $this->key
         ];
     }

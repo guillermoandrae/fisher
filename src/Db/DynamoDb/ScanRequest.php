@@ -2,12 +2,8 @@
 
 namespace Guillermoandrae\Fisher\Db\DynamoDb;
 
-use Aws\DynamoDb\Marshaler;
-
-final class ScanRequest extends AbstractItemRequest
+final class ScanRequest extends AbstractLimitableRequest
 {
-    use LimitableRequestTrait;
-
     /**
      * @var boolean Whether or not to scan forward.
      */
@@ -17,18 +13,6 @@ final class ScanRequest extends AbstractItemRequest
      * @var boolean Whether or not the read should be consistent.
      */
     private $consistentRead = false;
-
-    /**
-     * Registers the JSON Marshaler and table name with this object.
-     *
-     * @param Marshaler $marshaler The JSON Marshaler.
-     * @param string $tableName The table name.
-     */
-    public function __construct(Marshaler $marshaler, string $tableName)
-    {
-        parent::__construct($marshaler);
-        $this->setTableName($tableName);
-    }
 
     /**
      * Registers the ScanIndexForward value with this object.
@@ -63,9 +47,14 @@ final class ScanRequest extends AbstractItemRequest
             'TableName' => $this->tableName,
             'ScanIndexForward' => $this->scanIndexForward,
             'ConsistentRead' => $this->consistentRead,
+            'ReturnConsumedCapacity' => $this->returnConsumedCapacity,
         ];
         if ($this->limit) {
             $query['Limit'] = $this->limit;
+        }
+        if ($this->filterExpression) {
+            $query['FilterExpression'] = $this->filterExpression;
+            $query['ExpressionAttributeValues'] = $this->expressionAttributeValues;
         }
         return $query;
     }
