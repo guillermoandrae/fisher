@@ -1,4 +1,6 @@
 language: php
 script:
 - composer install --optimize-autoloader
+- composer start-local
 - composer test
+- composer stop-local
