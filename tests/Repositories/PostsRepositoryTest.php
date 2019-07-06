@@ -4,8 +4,7 @@ namespace GuillermoandraeTest\Fisher\Repositories;
 
 use Aws\DynamoDb\Marshaler;
 use PHPUnit\Framework\TestCase;
-use Guillermoandrae\Common\Collection;
-use Guillermoandrae\Fisher\Models\PostModel;
+use Guillermoandrae\Repositories\RepositoryInterface;
 use Guillermoandrae\Repositories\RepositoryFactory;
 use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
 use GuillermoandraeTest\Fisher\LocalDynamoDbClient;
@@ -19,7 +18,7 @@ final class PostsRepositoryTest extends TestCase
     private static $adapter;
     
     /**
-     * @var PostsRepository
+     * @var RepositoryInterface
      */
     private $repository;
 
@@ -61,15 +60,22 @@ final class PostsRepositoryTest extends TestCase
         self::$dynamoDb->deleteTable(['TableName' => self::$tableName]);
     }
     
+    public function testFindById()
+    {
+        $data = ['source' => 'Spotify', 'createdAt' => strtotime('today')];
+        $result = $this->repository->create($data);
+        $this->assertEquals($result, $this->repository->findById($data));
+        $this->repository->delete($data);
+    }
+
     public function testInsert()
     {
         $sources = ['Twitter', 'Instagram', 'Pinterest'];
         foreach ($sources as $source) {
             $data = ['source' => $source, 'createdAt' => strtotime('today')];
-            $this->repository->create($data);
+            $result = $this->repository->create($data);
+            $this->assertSame($source, $result['source']);
         }
-        $posts = $this->repository->findAll();
-        $this->assertCount(3, $posts);
     }
 
     public function testDelete()

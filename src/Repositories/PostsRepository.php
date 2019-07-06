@@ -6,8 +6,6 @@ use Guillermoandrae\Common\Collection;
 use Guillermoandrae\Models\ModelInterface;
 use Guillermoandrae\Fisher\Models\PostModel;
 use Guillermoandrae\Common\CollectionInterface;
-use Guillermoandrae\Fisher\Db\AdapterInterface;
-use Guillermoandrae\Repositories\AbstractRepository;
 
 final class PostsRepository extends AbstractRepository
 {
@@ -15,26 +13,11 @@ final class PostsRepository extends AbstractRepository
      * @var integer The default row limit.
      */
     const DEFAULT_LIMIT = 25;
-    
-    /**
-     * @var AdapterInterface The adapter.
-     */
-    private $adapter;
 
     /**
      * @var string
      */
     private $tableName = 'social-media-posts';
-    
-    /**
-     * Registers the adapter with this object.
-     *
-     * @param AdapterInterface $adapter The adapter.
-     */
-    public function __construct(AdapterInterface $adapter)
-    {
-        $this->adapter = $adapter;
-    }
     
     /**
      * {@inheritDoc}
@@ -48,6 +31,15 @@ final class PostsRepository extends AbstractRepository
         }
         return Collection::make($posts)->sortBy('createdAt', true)
             ->limit($offset, $limit ?? self::DEFAULT_LIMIT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findById($id): ModelInterface
+    {
+        $results = $this->adapter->useTable($this->tableName)->findById($id);
+        return new PostModel($results);
     }
 
     /**

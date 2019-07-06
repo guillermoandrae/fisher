@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Guillermoandrae\Fisher\Db\DbException;
 use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
 use GuillermoandraeTest\Fisher\LocalDynamoDbClient;
+use Aws\DynamoDb\DynamoDbClient;
 
 final class DynamoDbAdapterTest extends TestCase
 {
@@ -24,6 +25,12 @@ final class DynamoDbAdapterTest extends TestCase
         $this->adapter->useTable('test')->findLatest();
     }
 
+    public function testBadFindById()
+    {
+        $this->expectException(DbException::class);
+        $this->adapter->useTable('test')->findById([]);
+    }
+
     public function testBadInsert()
     {
         $this->expectException(DbException::class);
@@ -34,6 +41,11 @@ final class DynamoDbAdapterTest extends TestCase
     {
         $this->expectException(DbException::class);
         $this->adapter->useTable('test')->delete([]);
+    }
+
+    public function testGetClient()
+    {
+        $this->assertInstanceOf(DynamoDbClient::class, $this->adapter->getClient());
     }
 
     protected function setUp(): void

@@ -17,7 +17,7 @@ final class RequestFactory
      * Creates and returns the desired request.
      *
      * @param string $type The request type.
-     * @param mixed $options OPTIONAL The request options.
+     * @param mixed $options,... OPTIONAL The request options.
      * @return RequestInterface The request.
      * @throws DbException Thrown when an error occurs in creating the request.
      */

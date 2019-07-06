@@ -62,7 +62,7 @@ interface AdapterInterface
     /**
      * Registers the client.
      *
-     * @param mixed The client.
+     * @param mixed $client The client.
      * @return AdapterInterface An implementation of this interface.
      */
     public function setClient($client): AdapterInterface;
