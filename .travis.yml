@@ -7,7 +7,7 @@ matrix:
         - php: nightly
     fast_finish: true
 before_install:
-  - travis_wait composer start-local > /dev/null &
+  - travis_wait composer start-db > /dev/null &
 script:
   - composer install --optimize-autoloader
   - composer test
