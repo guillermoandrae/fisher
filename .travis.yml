@@ -1,7 +1,6 @@
 language: php
 matrix:
     include:
-        - php: 7.1
         - php: 7.2
         - php: nightly
     allow_failures:
@@ -12,4 +11,3 @@ before_install:
 script:
   - composer install --optimize-autoloader
   - composer test
-  - composer stop-local
