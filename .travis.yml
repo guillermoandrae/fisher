@@ -1,6 +1,6 @@
 language: php
+install: travis_wait composer start-local
 script:
-- composer install --optimize-autoloader
-- composer start-local
-- composer test
-- composer stop-local
+  - composer install --optimize-autoloader
+  - composer test
+  - composer stop-local
