@@ -2,7 +2,7 @@
 
 namespace Guillermoandrae\Fisher\Db\DynamoDb;
 
-final class ScanRequest extends AbstractLimitableRequest
+final class ScanRequest extends AbstractFilterExpressionAwareRequest
 {
     /**
      * @var boolean Whether or not to scan forward.

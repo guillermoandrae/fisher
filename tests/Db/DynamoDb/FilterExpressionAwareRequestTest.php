@@ -4,13 +4,13 @@ namespace GuillermoandraeTest\Fisher\Db\DynamoDb;
 
 use Aws\DynamoDb\Marshaler;
 use PHPUnit\Framework\TestCase;
-use Guillermoandrae\Fisher\Db\DynamoDb\AbstractLimitableRequest;
 use Guillermoandrae\Fisher\Db\DynamoDb\RequestOperators;
+use Guillermoandrae\Fisher\Db\DynamoDb\AbstractFilterExpressionAwareRequest;
 
-final class LimitableRequestTest extends TestCase
+final class FilterExpressionAwareRequestTest extends TestCase
 {
     /**
-     * @var AbstractLimitableRequest The request.
+     * @var AbstractFilterExpressionAwareRequest The request.
      */
     private $request;
 
@@ -121,7 +121,7 @@ final class LimitableRequestTest extends TestCase
     protected function setUp(): void
     {
         $this->request = $this->getMockForAbstractClass(
-            AbstractLimitableRequest::class,
+            AbstractFilterExpressionAwareRequest::class,
             [new Marshaler(), 'test']
         );
     }

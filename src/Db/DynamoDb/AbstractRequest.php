@@ -13,20 +13,13 @@ abstract class AbstractRequest implements ArrayableInterface, RequestInterface
     protected $marshaler;
 
     /**
-     * @var string The table name.
-     */
-    protected $tableName;
-
-    /**
      * Registers the JSON Marshaler and table name with this object.
      *
      * @param Marshaler $marshaler The JSON Marshaler.
-     * @param string $tableName The table name.
      */
-    public function __construct(Marshaler $marshaler, string $tableName)
+    public function __construct(Marshaler $marshaler)
     {
         $this->setMarshaler($marshaler);
-        $this->setTableName($tableName);
     }
 
     /**
@@ -41,27 +34,8 @@ abstract class AbstractRequest implements ArrayableInterface, RequestInterface
     /**
      * {@inheritDoc}
      */
-    final public function setTableName(string $tableName): RequestInterface
-    {
-        $this->tableName = $tableName;
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     final public function toArray(): array
     {
         return $this->get();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function get(): array
-    {
-        return [
-            'TableName' => $this->tableName,
-        ];
     }
 }

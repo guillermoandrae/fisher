@@ -2,7 +2,7 @@
 
 namespace Guillermoandrae\Fisher\Db\DynamoDb;
 
-abstract class AbstractItemRequest extends AbstractRequest
+abstract class AbstractItemRequest extends AbstractTableAwareRequest
 {
     /**
      * @var array

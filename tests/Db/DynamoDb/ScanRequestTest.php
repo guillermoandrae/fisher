@@ -5,7 +5,6 @@ namespace GuillermoandraeTest\Fisher\Db\DynamoDb;
 use Aws\DynamoDb\Marshaler;
 use PHPUnit\Framework\TestCase;
 use Guillermoandrae\Fisher\Db\DynamoDb\ScanRequest;
-use Guillermoandrae\Fisher\Db\DynamoDb\RequestOperators;
 
 final class ScanRequestTest extends TestCase
 {

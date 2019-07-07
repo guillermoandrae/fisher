@@ -15,14 +15,6 @@ interface RequestInterface
     public function setMarshaler(Marshaler $marshaler): RequestInterface;
 
     /**
-     * Sets the table name.
-     *
-     * @param string $tableName The table name.
-     * @return RequestInterface An implementation of this interface.
-     */
-    public function setTableName(string $tableName): RequestInterface;
-
-    /**
      * Returns the query.
      *
      * @return array The query.

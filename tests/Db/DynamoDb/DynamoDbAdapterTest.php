@@ -11,8 +11,40 @@ use Aws\DynamoDb\DynamoDbClient;
 
 final class DynamoDbAdapterTest extends TestCase
 {
+    /**
+     * @var DynamoDbAdapter
+     */
     private $adapter;
+
+    public function testCreateDeleteListTable()
+    {
+        $this->adapter->useTable('widgets')->createTable([
+            'name' => ['type' => 'S', 'keyType' => 'HASH'],
+            'date' => ['type' => 'N', 'keyType' => 'RANGE'],
+        ]);
+        $this->assertContains('widgets', $this->adapter->listTables());
+        $this->adapter->useTable('widgets')->deleteTable();
+        $this->assertNotContains('widgets', $this->adapter->listTables());
+    }
     
+    public function testBadCreateTable()
+    {
+        $this->expectException(DbException::class);
+        $this->adapter->useTable('te\st')->createTable(['name' => ['type' => 'S', 'keyType' => 'HASH']]);
+    }
+
+    public function testBadCreateTableBadKeySchema()
+    {
+        $this->expectException(DbException::class);
+        $this->adapter->useTable('test')->createTable([]);
+    }
+
+    public function testBadDeleteTable()
+    {
+        $this->expectException(DbException::class);
+        $this->adapter->useTable('test')->deleteTable([]);
+    }
+
     public function testBadFindAll()
     {
         $this->expectException(DbException::class);

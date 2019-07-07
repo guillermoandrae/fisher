@@ -47,6 +47,46 @@ final class DynamoDbAdapter implements AdapterInterface
     /**
      * {@inheritDoc}
      */
+    public function createTable(array $data): bool
+    {
+        try {
+            $query = RequestFactory::factory('create-table', $this->tableName, $data)->get();
+            $this->client->createTable($query);
+            return true;
+        } catch (DynamoDbException $ex) {
+            throw new DbException($ex->getMessage());
+        } catch (\InvalidArgumentException $ex) {
+            throw new DbException('Bad key schema: ' . $ex->getMessage());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deleteTable(): bool
+    {
+        try {
+            $query = RequestFactory::factory('delete-table', $this->tableName)->get();
+            $this->client->deleteTable($query);
+            return true;
+        } catch (DynamoDbException $ex) {
+            throw new DbException($ex->getMessage());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function listTables(): array
+    {
+        $query = RequestFactory::factory('list-tables')->get();
+        $results = $this->client->listTables($query);
+        return $results['TableNames'];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function findAll(int $offset = 0, ?int $limit = null): CollectionInterface
     {
         try {

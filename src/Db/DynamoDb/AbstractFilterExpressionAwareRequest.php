@@ -2,39 +2,22 @@
 
 namespace Guillermoandrae\Fisher\Db\DynamoDb;
 
-use Aws\DynamoDb\Marshaler;
-
-abstract class AbstractLimitableRequest extends AbstractItemRequest
+abstract class AbstractFilterExpressionAwareRequest extends AbstractItemRequest
 {
+    use LimitAwareRequestTrait;
+
     /**
      * @var string The filter expression.
      */
     protected $filterExpression;
-    
-    /**
-     * @var int The result limit.
-     */
-    protected $limit;
-
-    /**
-     * Registers the result limit with this object.
-     *
-     * @param integer $limit The result limit.
-     * @return AbstractLimitableRequest An implementation of this abstract.
-     */
-    final public function setLimit(int $limit): AbstractLimitableRequest
-    {
-        $this->limit = $limit;
-        return $this;
-    }
 
     /**
      * Registers the filter expression with this object.
      *
      * @param array $data The filter expression data.
-     * @return AbstractLimitableRequest An implementation of this abstract.
+     * @return AbstractFilterExpressionAwareRequest An implementation of this abstract.
      */
-    final public function setFilterExpression(array $data): AbstractLimitableRequest
+    final public function setFilterExpression(array $data): AbstractFilterExpressionAwareRequest
     {
         $filterExpressionArray = [];
         foreach ($data as $key => $options) {

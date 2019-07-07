@@ -7,6 +7,30 @@ use Guillermoandrae\Common\CollectionInterface;
 interface AdapterInterface
 {
     /**
+     * Creates a database table.
+     *
+     * @param array $data The table options.
+     * @return bool Whether or not the table creation was successful.
+     * @throws DbException Thrown when an error occurs during creation.
+     */
+    public function createTable(array $data): bool;
+    
+    /**
+     * Deletes a table from the database.
+     *
+     * @return boolean Whether or not the table deletion was successful.
+     * @throws DbException Thrown when an error occurs during deletion.
+     */
+    public function deleteTable(): bool;
+
+    /**
+     * Returns an array of database tables.
+     *
+     * @return array The database tables.
+     */
+    public function listTables(): array;
+
+    /**
      * Retrieves all of the rows in a database table. When an offset and limit
      * are provided, the desired slice is returned.
      *
