@@ -14,7 +14,55 @@ final class LimitableRequestTest extends TestCase
      */
     private $request;
 
-    public function testSetFilterExpression()
+    public function testFilterExpressionGT()
+    {
+        $expectedExpression = 'width > :width';
+        $this->request->setFilterExpression([
+            'width' => [
+                'operator' => RequestOperators::GT,
+                'value' => '10',
+            ]
+        ]);
+        $this->assertEquals($expectedExpression, $this->request->toArray()['FilterExpression']);
+    }
+
+    public function testFilterExpressionGTE()
+    {
+        $expectedExpression = 'width >= :width';
+        $this->request->setFilterExpression([
+            'width' => [
+                'operator' => RequestOperators::GTE,
+                'value' => '10',
+            ]
+        ]);
+        $this->assertEquals($expectedExpression, $this->request->toArray()['FilterExpression']);
+    }
+
+    public function testFilterExpressionLT()
+    {
+        $expectedExpression = 'width < :width';
+        $this->request->setFilterExpression([
+            'width' => [
+                'operator' => RequestOperators::LT,
+                'value' => '10',
+            ]
+        ]);
+        $this->assertEquals($expectedExpression, $this->request->toArray()['FilterExpression']);
+    }
+
+    public function testFilterExpressionLTE()
+    {
+        $expectedExpression = 'width <= :width';
+        $this->request->setFilterExpression([
+            'width' => [
+                'operator' => RequestOperators::LTE,
+                'value' => '10',
+            ]
+        ]);
+        $this->assertEquals($expectedExpression, $this->request->toArray()['FilterExpression']);
+    }
+
+    public function testSetFilterExpressionAndExpressionAttributeValues()
     {
         $this->request->setFilterExpression([
             'color' => [
@@ -24,18 +72,25 @@ final class LimitableRequestTest extends TestCase
             'shape' => [
                 'operator' => RequestOperators::CONTAINS,
                 'value' => 'square'
+            ],
+            'width' => [
+                'operator' => RequestOperators::GTE,
+                'value' => 10
             ]
         ]);
         $expectedQuery = [
             'TableName' => 'test',
             'ReturnConsumedCapacity' => 'NONE',
-            'FilterExpression' => 'color = :color and contains(shape, :shape)',
+            'FilterExpression' => 'color = :color and contains(shape, :shape) and width >= :width',
             'ExpressionAttributeValues' => [
                 ':color' => [
                     'S' => 'black'
                 ],
                 ':shape' => [
                     'S' => 'square',
+                ],
+                ':width' => [
+                    'S' => 10
                 ]
             ],
         ];
