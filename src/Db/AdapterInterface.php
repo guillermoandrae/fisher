@@ -24,6 +24,21 @@ interface AdapterInterface
     public function deleteTable(): bool;
 
     /**
+     * Returns information about a database table.
+     *
+     * @return array The table data.
+     * @throws DbException Thrown when an error occurs during the existence check.
+     */
+    public function describeTable(): array;
+
+    /**
+     * Determines whether or not a table exists in the database.
+     *
+     * @return boolean Whether or not the table exists.
+     */
+    public function tableExists(): bool;
+
+    /**
      * Returns an array of database tables.
      *
      * @return array The database tables.

@@ -22,9 +22,9 @@ final class DynamoDbAdapterTest extends TestCase
             'name' => ['type' => 'S', 'keyType' => 'HASH'],
             'date' => ['type' => 'N', 'keyType' => 'RANGE'],
         ]);
-        $this->assertContains('widgets', $this->adapter->listTables());
+        $this->assertTrue($this->adapter->tableExists('widgets'));
         $this->adapter->useTable('widgets')->deleteTable();
-        $this->assertNotContains('widgets', $this->adapter->listTables());
+        $this->assertFalse($this->adapter->tableExists('widgets'));
     }
     
     public function testBadCreateTable()
@@ -42,7 +42,21 @@ final class DynamoDbAdapterTest extends TestCase
     public function testBadDeleteTable()
     {
         $this->expectException(DbException::class);
-        $this->adapter->useTable('test')->deleteTable([]);
+        $this->adapter->useTable('test')->deleteTable();
+    }
+
+    public function testDescribeTable()
+    {
+        $this->adapter->useTable('test')->createTable(['name' => ['type' => 'S', 'keyType' => 'HASH']]);
+        $results = $this->adapter->useTable('test')->describeTable();
+        $this->assertSame(5, $results['ProvisionedThroughput']['ReadCapacityUnits']);
+        $this->adapter->useTable('test')->deleteTable();
+    }
+
+    public function testBadDescribeTable()
+    {
+        $this->expectException(DbException::class);
+        $this->adapter->useTable('juniper')->describeTable();
     }
 
     public function testBadFindAll()
@@ -84,5 +98,13 @@ final class DynamoDbAdapterTest extends TestCase
     {
         $dynamoDb = LocalDynamoDbClient::get();
         $this->adapter = new DynamoDbAdapter($dynamoDb, new Marshaler());
+    }
+
+    protected function tearDown(): void
+    {
+        $tables = $this->adapter->listTables();
+        foreach ($tables as $table) {
+            $this->adapter->useTable($table)->deleteTable();
+        }
     }
 }

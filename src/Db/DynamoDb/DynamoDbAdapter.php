@@ -77,6 +77,32 @@ final class DynamoDbAdapter implements AdapterInterface
     /**
      * {@inheritDoc}
      */
+    public function describeTable(): array
+    {
+        try {
+            $query = RequestFactory::factory('describe-table', $this->tableName)->get();
+            $result = $this->client->describeTable($query);
+            return $result['Table'];
+        } catch (DynamoDbException $ex) {
+            throw new DbException($ex->getMessage());
+        }
+    }
+
+     /**
+     * {@inheritDoc}
+     */
+    public function tableExists(): bool
+    {
+        $tables = $this->listTables();
+        return in_array(
+            strtolower($this->tableName),
+            array_map('strtolower', $tables)
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function listTables(): array
     {
         $query = RequestFactory::factory('list-tables')->get();
