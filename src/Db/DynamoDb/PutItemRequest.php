@@ -20,8 +20,7 @@ final class PutItemRequest extends AbstractItemRequest
      */
     public function __construct(Marshaler $marshaler, string $tableName, array $item)
     {
-        parent::__construct($marshaler);
-        $this->setTableName($tableName);
+        parent::__construct($marshaler, $tableName);
         $this->setItem($item);
     }
 

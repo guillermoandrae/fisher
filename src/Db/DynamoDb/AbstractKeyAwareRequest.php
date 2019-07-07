@@ -20,8 +20,7 @@ abstract class AbstractKeyAwareRequest extends AbstractItemRequest
      */
     public function __construct(Marshaler $marshaler, string $tableName, array $key)
     {
-        parent::__construct($marshaler);
-        $this->setTableName($tableName);
+        parent::__construct($marshaler, $tableName);
         $this->setKey($key);
     }
 
