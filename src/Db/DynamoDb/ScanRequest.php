@@ -43,19 +43,9 @@ final class ScanRequest extends AbstractLimitableRequest
      */
     public function get(): array
     {
-        $query = [
-            'TableName' => $this->tableName,
-            'ScanIndexForward' => $this->scanIndexForward,
-            'ConsistentRead' => $this->consistentRead,
-            'ReturnConsumedCapacity' => $this->returnConsumedCapacity,
-        ];
-        if ($this->limit) {
-            $query['Limit'] = $this->limit;
-        }
-        if ($this->filterExpression) {
-            $query['FilterExpression'] = $this->filterExpression;
-            $query['ExpressionAttributeValues'] = $this->expressionAttributeValues;
-        }
+        $query = parent::get();
+        $query['ScanIndexForward'] = $this->scanIndexForward;
+        $query['ConsistentRead'] = $this->consistentRead;
         return $query;
     }
 }

@@ -57,6 +57,21 @@ abstract class AbstractLimitableRequest extends AbstractItemRequest
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function get(): array
+    {
+        $query = parent::get();
+        if ($this->limit) {
+            $query['Limit'] = $this->limit;
+        }
+        if ($this->filterExpression) {
+            $query['FilterExpression'] = $this->filterExpression;
+        }
+        return $query;
+    }
+
     protected function parseExpression(string $operator, $key): string
     {
         switch ($operator) {

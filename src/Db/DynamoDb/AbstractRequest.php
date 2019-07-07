@@ -52,4 +52,14 @@ abstract class AbstractRequest implements ArrayableInterface, RequestInterface
     {
         return $this->get();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function get(): array
+    {
+        return [
+            'TableName' => $this->tableName,
+        ];
+    }
 }

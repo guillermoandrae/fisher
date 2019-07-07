@@ -38,4 +38,17 @@ abstract class AbstractItemRequest extends AbstractRequest
         $this->returnConsumedCapacity = $returnConsumedCapacity;
         return $this;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function get(): array
+    {
+        $query = parent::get();
+        if ($this->expressionAttributeValues) {
+            $query['ExpressionAttributeValues'] = $this->expressionAttributeValues;
+        }
+        $query['ReturnConsumedCapacity'] = $this->returnConsumedCapacity;
+        return $query;
+    }
 }

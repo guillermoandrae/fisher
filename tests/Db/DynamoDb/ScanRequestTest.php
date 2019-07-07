@@ -37,7 +37,7 @@ final class ScanRequestTest extends TestCase
                 ]
             ],
         ];
-        $this->assertSame($expectedQuery, $request->toArray());
+        $this->assertEquals($expectedQuery, $request->toArray());
     }
     
     public function testSetReturnConsumedCapacity()
@@ -50,7 +50,7 @@ final class ScanRequestTest extends TestCase
             'ConsistentRead' => false,
             'ReturnConsumedCapacity' => 'INDEXES'
         ];
-        $this->assertSame($expectedQuery, $request->toArray());
+        $this->assertEquals($expectedQuery, $request->toArray());
     }
 
     public function testSetLimit()
@@ -64,7 +64,7 @@ final class ScanRequestTest extends TestCase
             'ReturnConsumedCapacity' => 'NONE',
             'Limit' => 2
         ];
-        $this->assertSame($expectedQuery, $request->toArray());
+        $this->assertEquals($expectedQuery, $request->toArray());
     }
     
     public function testSetScanIndexForward()
@@ -77,7 +77,7 @@ final class ScanRequestTest extends TestCase
             'ConsistentRead' => false,
             'ReturnConsumedCapacity' => 'NONE'
         ];
-        $this->assertSame($expectedQuery, $request->toArray());
+        $this->assertEquals($expectedQuery, $request->toArray());
     }
 
     public function testSetConsistentRead()
@@ -90,6 +90,6 @@ final class ScanRequestTest extends TestCase
             'ConsistentRead' => true,
             'ReturnConsumedCapacity' => 'NONE'
         ];
-        $this->assertSame($expectedQuery, $request->toArray());
+        $this->assertEquals($expectedQuery, $request->toArray());
     }
 }
