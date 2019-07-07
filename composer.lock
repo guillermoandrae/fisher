@@ -91,16 +91,16 @@
         },
         {
             "name": "guillermoandrae/php-collection",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guillermoandrae/php-collection.git",
-                "reference": "7bb9db40ea84dbd78b84742696da8da103eee8f1"
+                "reference": "926cb5a1fba7fc9ac20e8031b48b9bc1b61c87ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guillermoandrae/php-collection/zipball/7bb9db40ea84dbd78b84742696da8da103eee8f1",
-                "reference": "7bb9db40ea84dbd78b84742696da8da103eee8f1",
+                "url": "https://api.github.com/repos/guillermoandrae/php-collection/zipball/926cb5a1fba7fc9ac20e8031b48b9bc1b61c87ee",
+                "reference": "926cb5a1fba7fc9ac20e8031b48b9bc1b61c87ee",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
                 }
             ],
             "description": " PHP Collection Library",
-            "time": "2019-05-28T23:13:35+00:00"
+            "time": "2019-07-07T02:00:59+00:00"
         },
         {
             "name": "guillermoandrae/php-debug",
