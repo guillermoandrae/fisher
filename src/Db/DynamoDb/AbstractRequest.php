@@ -18,13 +18,15 @@ abstract class AbstractRequest implements ArrayableInterface, RequestInterface
     protected $tableName;
 
     /**
-     * Registers the Marshaler with this object.
+     * Registers the JSON Marshaler and table name with this object.
      *
      * @param Marshaler $marshaler The JSON Marshaler.
+     * @param string $tableName The table name.
      */
-    public function __construct(Marshaler $marshaler)
+    public function __construct(Marshaler $marshaler, string $tableName)
     {
         $this->setMarshaler($marshaler);
+        $this->setTableName($tableName);
     }
 
     /**
