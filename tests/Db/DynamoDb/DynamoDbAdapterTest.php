@@ -4,10 +4,10 @@ namespace GuillermoandraeTest\Fisher\Db\DynamoDb;
 
 use Aws\DynamoDb\Marshaler;
 use PHPUnit\Framework\TestCase;
-use Guillermoandrae\Fisher\Db\DbException;
-use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
-use GuillermoandraeTest\Fisher\LocalDynamoDbClient;
 use Aws\DynamoDb\DynamoDbClient;
+use Guillermoandrae\Fisher\Db\DbException;
+use GuillermoandraeTest\Fisher\LocalDynamoDbClient;
+use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
 
 final class DynamoDbAdapterTest extends TestCase
 {

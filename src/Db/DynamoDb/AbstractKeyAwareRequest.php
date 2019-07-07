@@ -7,7 +7,7 @@ use Aws\DynamoDb\Marshaler;
 abstract class AbstractKeyAwareRequest extends AbstractItemRequest
 {
     /**
-     * @var array The primary key.
+     * @var array The primary key values to be used when retrieving items.
      */
     protected $key;
     
@@ -16,7 +16,7 @@ abstract class AbstractKeyAwareRequest extends AbstractItemRequest
      *
      * @param Marshaler $marshaler The JSON Marshaler.
      * @param string $tableName The table name.
-     * @param array $key The primary key.
+     * @param array $key The primary key values to be used when retrieving items.
      */
     public function __construct(Marshaler $marshaler, string $tableName, array $key)
     {
@@ -25,9 +25,9 @@ abstract class AbstractKeyAwareRequest extends AbstractItemRequest
     }
 
     /**
-     * Registers the primary key with this object.
+     * Registers the operation's primary key with this object.
      *
-     * @param array $key The primary key.
+     * @param array $key The primary key values to be used when retrieving items.
      * @return AbstractKeyAwareRequest An implementation of this abstract.
      */
     public function setKey(array $key): AbstractKeyAwareRequest

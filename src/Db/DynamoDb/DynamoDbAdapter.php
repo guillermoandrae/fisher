@@ -7,8 +7,8 @@ use Aws\DynamoDb\DynamoDbClient;
 use Guillermoandrae\Common\Collection;
 use Guillermoandrae\Fisher\Db\DbException;
 use Aws\DynamoDb\Exception\DynamoDbException;
-use Guillermoandrae\Fisher\Db\AdapterInterface;
 use Guillermoandrae\Common\CollectionInterface;
+use Guillermoandrae\Fisher\Db\AdapterInterface;
 use Guillermoandrae\Repositories\RepositoryFactory;
 
 final class DynamoDbAdapter implements AdapterInterface

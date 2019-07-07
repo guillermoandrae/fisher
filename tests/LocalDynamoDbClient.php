@@ -6,8 +6,16 @@ use Aws\DynamoDb\DynamoDbClient;
 
 final class LocalDynamoDbClient
 {
+    /**
+     * @var DynamoDbClient The DynamoDB client.
+     */
     private static $instance;
     
+    /**
+     * Returns an instance of the DynamoDB client.
+     *
+     * @return DynamoDbClient
+     */
     public static function get(): DynamoDbClient
     {
         if (!self::$instance) {

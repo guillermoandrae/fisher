@@ -3,7 +3,6 @@
 namespace Guillermoandrae\Fisher\Db\DynamoDb;
 
 use Aws\DynamoDb\Marshaler;
-use Guillermoandrae\Common\ArrayableInterface;
 
 abstract class AbstractTableAwareRequest extends AbstractRequest
 {

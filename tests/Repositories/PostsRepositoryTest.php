@@ -4,10 +4,10 @@ namespace GuillermoandraeTest\Fisher\Repositories;
 
 use Aws\DynamoDb\Marshaler;
 use PHPUnit\Framework\TestCase;
-use Guillermoandrae\Repositories\RepositoryInterface;
 use Guillermoandrae\Repositories\RepositoryFactory;
-use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
 use GuillermoandraeTest\Fisher\LocalDynamoDbClient;
+use Guillermoandrae\Repositories\RepositoryInterface;
+use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
 
 final class PostsRepositoryTest extends TestCase
 {
