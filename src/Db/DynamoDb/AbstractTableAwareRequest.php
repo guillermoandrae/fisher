@@ -25,7 +25,7 @@ abstract class AbstractTableAwareRequest extends AbstractRequest
     }
 
     /**
-     * Sets the table name.
+     * Registers the table name.
      *
      * @param string $tableName The table name.
      * @return RequestInterface An implementation of this interface.

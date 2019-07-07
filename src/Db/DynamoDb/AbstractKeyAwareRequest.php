@@ -12,7 +12,7 @@ abstract class AbstractKeyAwareRequest extends AbstractItemRequest
     protected $key;
     
     /**
-     * Registers the Marshaler, table name, and primary key with this object.
+     * Registers the JSON Marshaler, table name, and primary key with this object.
      *
      * @param Marshaler $marshaler The JSON Marshaler.
      * @param string $tableName The table name.

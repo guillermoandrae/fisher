@@ -5,12 +5,12 @@ namespace Guillermoandrae\Fisher\Db\DynamoDb;
 abstract class AbstractItemRequest extends AbstractTableAwareRequest
 {
     /**
-     * @var array
+     * @var array Values that can be substituted in an expression.
      */
     protected $expressionAttributeValues = [];
     
     /**
-     * @var string
+     * @var string The level of detail about provisioned throughput consumption that is returned in the response.
      */
     protected $returnConsumedCapacity = ConsumedCapacityOptions::NONE;
 
@@ -28,7 +28,7 @@ abstract class AbstractItemRequest extends AbstractTableAwareRequest
     }
 
     /**
-     * Sets the desired level of consumption detail to return.
+     * Registers the desired level of consumption detail to return.
      *
      * @param string $returnConsumedCapacity The level of consumption detail to return.
      * @return AbstractItemRequest An implementation of this abstract.

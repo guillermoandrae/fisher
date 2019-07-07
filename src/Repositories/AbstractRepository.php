@@ -8,7 +8,7 @@ use Guillermoandrae\Repositories\AbstractRepository as AbstractBaseRepository;
 abstract class AbstractRepository extends AbstractBaseRepository
 {
     /**
-     * @var AdapterInterface The adapter.
+     * @var AdapterInterface The database adapter.
      */
     protected $adapter;
     
@@ -17,7 +17,7 @@ abstract class AbstractRepository extends AbstractBaseRepository
      *
      * @param AdapterInterface $adapter The adapter.
      */
-    public function __construct(AdapterInterface $adapter)
+    final public function __construct(AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
     }

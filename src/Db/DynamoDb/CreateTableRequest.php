@@ -26,6 +26,13 @@ final class CreateTableRequest extends AbstractTableAwareRequest
      */
     private $writeCapacityUnits = 5;
 
+    /**
+     * Registers the JSON Marshaler, table name, and key schema with this object.
+     *
+     * @param Marshaler $marshaler The JSON Marshaler.
+     * @param string $tableName The table name.
+     * @param array $keySchema The key schema.
+     */
     public function __construct(Marshaler $marshaler, string $tableName, array $keySchema)
     {
         parent::__construct($marshaler, $tableName);
@@ -33,7 +40,7 @@ final class CreateTableRequest extends AbstractTableAwareRequest
     }
 
     /**
-     * Sets the key schema and attribute definitions.
+     * Registers the key schema and attribute definitions.
      *
      * @param array $keySchema The key schema.
      * @return CreateTableRequest This object.
@@ -54,7 +61,7 @@ final class CreateTableRequest extends AbstractTableAwareRequest
     }
 
     /**
-     * Sets the maximum number of strongly consistent reads consumed per second.
+     * Registers the maximum number of strongly consistent reads consumed per second.
      *
      * @param integer $readCapacityUnits The maximum number of strongly consistent reads consumed per second.
      * @return CreateTableRequest This object.
@@ -66,7 +73,7 @@ final class CreateTableRequest extends AbstractTableAwareRequest
     }
 
     /**
-     * Sets the maximum number of writes consumed per second.
+     * Registers the maximum number of writes consumed per second.
      *
      * @param integer $writeCapacityUnits The maximum number of writes consumed per second.
      * @return CreateTableRequest This object.

@@ -12,7 +12,7 @@ final class ListTablesRequest extends AbstractRequest
     protected $lastEvaluatedTableName;
 
     /**
-     * Sets the name of table to be used as the last in the current page of results.
+     * Registers the name of table to be used as the last in the current page of results.
      *
      * @param string $lastEvaluatedTableName The name of the last table in the current page of results.
      * @return ListTablesRequest This object.
