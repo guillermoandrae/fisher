@@ -3,12 +3,13 @@
 namespace GuillermoandraeTest\Fisher\Db\DynamoDb;
 
 use Aws\DynamoDb\Marshaler;
-use PHPUnit\Framework\TestCase;
 use Guillermoandrae\Fisher\Db\DynamoDb\CreateTableRequest;
+use Guillermoandrae\Fisher\Db\DynamoDb\KeyTypes;
+use PHPUnit\Framework\TestCase;
 
 final class CreateTableRequestTest extends TestCase
 {
-    private $data = ['name' => ['type' => 'S', 'keyType' => 'HASH']];
+    private $data = ['name' => ['type' => 'S', 'keyType' => KeyTypes::HASH]];
     
     public function testSetKeySchema()
     {
@@ -23,7 +24,7 @@ final class CreateTableRequestTest extends TestCase
             'KeySchema' => [
                 [
                     'AttributeName' => 'name',
-                    'KeyType' => 'HASH',
+                    'KeyType' => KeyTypes::HASH,
                 ],
             ],
             'ProvisionedThroughput' => [
@@ -49,7 +50,7 @@ final class CreateTableRequestTest extends TestCase
             'KeySchema' => [
                 [
                     'AttributeName' => 'name',
-                    'KeyType' => 'HASH',
+                    'KeyType' => KeyTypes::HASH,
                 ],
             ],
             'ProvisionedThroughput' => [
@@ -75,7 +76,7 @@ final class CreateTableRequestTest extends TestCase
             'KeySchema' => [
                 [
                     'AttributeName' => 'name',
-                    'KeyType' => 'HASH',
+                    'KeyType' => KeyTypes::HASH,
                 ],
             ],
             'ProvisionedThroughput' => [
