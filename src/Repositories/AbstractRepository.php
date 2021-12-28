@@ -10,7 +10,7 @@ abstract class AbstractRepository extends AbstractBaseRepository
     /**
      * @var AdapterInterface The database adapter.
      */
-    protected $adapter;
+    protected AdapterInterface $adapter;
     
     /**
      * Registers the adapter with this object.

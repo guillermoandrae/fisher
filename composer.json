@@ -3,10 +3,10 @@
     "description": "Data access layer for the Andrae API",
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^8.0",
         "aws/aws-sdk-php": "^3.95",
-        "guillermoandrae/php-repository": "^1.2",
-        "icanboogie/inflector": "^1.5"
+        "guillermoandrae/php-repository": "^3.0",
+        "icanboogie/inflector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -14,7 +14,7 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.1",
+        "phpunit/phpunit": "^9.0",
         "squizlabs/php_codesniffer": "^3.4"
     },
     "autoload-dev": {
@@ -24,7 +24,7 @@
     },
     "scripts": {
         "start-db": [
-            "mkdir ./database",
+            "mkdir -p ./database",
             "wget --directory-prefix=./database https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.zip",
             "unzip ./database/dynamodb_local_latest.zip -d database",
             "nohup java -Djava.library.path=./database/DynamoDBLocal_lib -jar ./database/DynamoDBLocal.jar -sharedDb &"

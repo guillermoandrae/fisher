@@ -17,12 +17,12 @@ final class PostsRepository extends AbstractRepository
     /**
      * @var string
      */
-    private $tableName = 'social-media-posts';
+    private string $tableName = 'social-media-posts';
     
     /**
      * {@inheritDoc}
      */
-    public function findAll($offset = 0, $limit = null): CollectionInterface
+    public function findAll(int $offset = 0, ?int $limit = null): CollectionInterface
     {
         $posts = [];
         $results = $this->adapter->useTable($this->tableName)->findAll();
@@ -36,7 +36,15 @@ final class PostsRepository extends AbstractRepository
     /**
      * {@inheritDoc}
      */
-    public function findById($id): ModelInterface
+    public function find(mixed $id): ModelInterface
+    {
+        return $this->findById($id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findById(mixed $id): ModelInterface
     {
         $results = $this->adapter->useTable($this->tableName)->findById($id);
         return new PostModel($results);
@@ -45,7 +53,7 @@ final class PostsRepository extends AbstractRepository
     /**
      * {@inheritDoc}
      */
-    public function findWhere(array $where, int $offset = 0, int $limit = null): CollectionInterface
+    public function findWhere(array $where, int $offset = 0, ?int $limit = null): CollectionInterface
     {
         throw new \BadMethodCallException(sprintf('The %s method has not been implemented.', 'findWhere'));
     }
@@ -63,7 +71,7 @@ final class PostsRepository extends AbstractRepository
     /**
      * {@inheritDoc}
      */
-    public function update($id, array $data): ModelInterface
+    public function update(mixed $id, array $data): ModelInterface
     {
         throw new \BadMethodCallException(sprintf('The %s method has not been implemented.', 'update'));
     }
@@ -71,7 +79,7 @@ final class PostsRepository extends AbstractRepository
     /**
      * {@inheritDoc}
      */
-    public function delete($id): bool
+    public function delete(mixed $id): bool
     {
         return $this->adapter->useTable($this->tableName)->delete($id);
     }
