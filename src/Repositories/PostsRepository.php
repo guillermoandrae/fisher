@@ -17,7 +17,7 @@ final class PostsRepository extends AbstractRepository
     /**
      * @var string
      */
-    private string $tableName = 'social-media-posts';
+    private string $tableName = 'social-posts';
     
     /**
      * {@inheritDoc}
