@@ -2,9 +2,3 @@
 [![Travis](https://img.shields.io/travis/guillermoandrae/fisher.svg?style=flat-square)](https://travis-ci.org/guillermoandrae/fisher) ![GitHub](https://img.shields.io/github/license/guillermoandrae/fisher.svg?style=flat-square) [![@guillermoandrae on Twitter](http://img.shields.io/badge/twitter-%40guillermoandrae-blue.svg?style=flat-square)](https://twitter.com/guillermoandrae)
 
 This is the code used to access the database(s) behind my personal website, https://bklyn.dev.
-
-## Installation
-Do this, then relax:
-```
-composer require guillermoandrae/fisher
-```
