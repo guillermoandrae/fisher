@@ -2,25 +2,18 @@
 
 namespace AppTest\Repositories;
 
-use BadMethodCallException;
+use AppTest\Contracts\AbstractRepositoryTestCase;
 use Guillermoandrae\DynamoDb\Constant\AttributeTypes;
 use Guillermoandrae\DynamoDb\Constant\KeyTypes;
 use Guillermoandrae\DynamoDb\Constant\Operators;
-use Guillermoandrae\DynamoDb\Contract\DynamoDbAdapterInterface;
-use Guillermoandrae\DynamoDb\DynamoDbAdapter;
-use Guillermoandrae\Repositories\RepositoryFactory;
-use Guillermoandrae\Repositories\RepositoryInterface;
-use PHPUnit\Framework\TestCase;
 
-final class PostsRepositoryTest extends TestCase
+final class PostsRepositoryTest extends AbstractRepositoryTestCase
 {
-    private string $tableName = 'social-posts';
+    protected string $tableName = 'social-posts';
 
-    private DynamoDbAdapterInterface $dynamoDbAdapter;
+    protected string $modelName = 'posts';
 
-    private RepositoryInterface $repository;
-
-    public function testCreate()
+    public function testCreate(): void
     {
         $data = [
             'originalAuthor' => 'testing',
@@ -32,7 +25,7 @@ final class PostsRepositoryTest extends TestCase
         $this->repository->delete($data);
     }
 
-    public function testFind()
+    public function testFind(): void
     {
         $data = [
             'originalAuthor' => 'testing',
@@ -45,7 +38,7 @@ final class PostsRepositoryTest extends TestCase
         $this->repository->delete($data);
     }
 
-    public function testFindAllAndDelete()
+    public function testFindAllAndDelete(): void
     {
         $data = [
             'originalAuthor' => 'testing',
@@ -59,7 +52,7 @@ final class PostsRepositoryTest extends TestCase
         $this->assertCount(0, $posts);
     }
 
-    public function testFindWhere()
+    public function testFindWhere(): void
     {
         $data = [
             ['originalAuthor' => 'testing1', 'createdAt' => strtotime('yesterday')],
@@ -86,26 +79,11 @@ final class PostsRepositoryTest extends TestCase
         }
     }
 
-    public function testUpdate()
+    protected function setUpTable(): void
     {
-        $this->expectException(BadMethodCallException::class);
-        $this->repository->update(1, []);
-    }
-
-    protected function setUp(): void
-    {
-        $this->dynamoDbAdapter = new DynamoDbAdapter();
-        if (!$this->dynamoDbAdapter->tableExists($this->tableName)) {
-            $this->dynamoDbAdapter->createTable([
-                'originalAuthor' => [AttributeTypes::STRING, KeyTypes::HASH],
-                'createdAt' => [AttributeTypes::NUMBER, KeyTypes::RANGE],
-            ], $this->tableName);
-        }
-        $this->repository = RepositoryFactory::factory('posts', $this->dynamoDbAdapter);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->dynamoDbAdapter->deleteTable($this->tableName);
+        $this->dynamoDbAdapter->createTable([
+            'originalAuthor' => [AttributeTypes::STRING, KeyTypes::HASH],
+            'createdAt' => [AttributeTypes::NUMBER, KeyTypes::RANGE],
+        ], $this->tableName);
     }
 }
