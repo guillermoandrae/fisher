@@ -1,27 +1,20 @@
 <?php
 
-namespace Guillermoandrae\Fisher\Repositories;
+namespace App\Repositories;
 
+use App\Models\PostModel;
+use BadMethodCallException;
 use Guillermoandrae\Common\Collection;
-use Guillermoandrae\Models\ModelInterface;
-use Guillermoandrae\Fisher\Models\PostModel;
 use Guillermoandrae\Common\CollectionInterface;
+use Guillermoandrae\DynamoDb\Constant\Operators;
+use Guillermoandrae\Models\ModelInterface;
 
 final class PostsRepository extends AbstractRepository
 {
-    /**
-     * @var integer The default row limit.
-     */
-    const DEFAULT_LIMIT = 25;
+    public const DEFAULT_LIMIT = 25;
 
-    /**
-     * @var string
-     */
     private string $tableName = 'social-posts';
-    
-    /**
-     * {@inheritDoc}
-     */
+
     public function findAll(int $offset = 0, ?int $limit = null): CollectionInterface
     {
         $posts = [];
@@ -33,54 +26,47 @@ final class PostsRepository extends AbstractRepository
             ->limit($offset, $limit ?? self::DEFAULT_LIMIT);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function find(mixed $id): ModelInterface
+    public function find(mixed $primaryKey): ModelInterface
     {
-        return $this->findById($id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function findById(mixed $id): ModelInterface
-    {
-        $results = $this->adapter->useTable($this->tableName)->findById($id);
+        $results = $this->adapter->useTable($this->tableName)->find($primaryKey);
         return new PostModel($results);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function findWhere(array $where, int $offset = 0, ?int $limit = null): CollectionInterface
     {
-        throw new \BadMethodCallException(sprintf('The %s method has not been implemented.', 'findWhere'));
+        $posts = [];
+        $results = $this->adapter->useTable($this->tableName)
+            ->findWhere($where, $offset, $limit ?? self::DEFAULT_LIMIT);
+        foreach ($results as $post) {
+            $posts[] = new PostModel($post);
+        }
+        return Collection::make($posts);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function create(array $data): ModelInterface
     {
         $this->adapter->useTable($this->tableName)->insert($data);
-        $result = $this->adapter->useTable($this->tableName)->findLatest();
-        return new PostModel($result);
+        $results = $this->findWhere([
+            'partition' => [
+                'name' => 'originalAuthor',
+                'value' => $data['originalAuthor']
+            ],
+            'sort' => [
+                'name' => 'createdAt',
+                'operator' => Operators::EQ,
+                'value' => $data['createdAt']
+            ]
+        ]);
+        return $results[0];
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function update(mixed $id, array $data): ModelInterface
+    public function update(mixed $primaryKey, array $data): ModelInterface
     {
-        throw new \BadMethodCallException(sprintf('The %s method has not been implemented.', 'update'));
+        throw new BadMethodCallException(sprintf('The %s method has not been implemented.', 'update'));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function delete(mixed $id): bool
+    public function delete(mixed $primaryKey): bool
     {
-        return $this->adapter->useTable($this->tableName)->delete($id);
+        return $this->adapter->useTable($this->tableName)->delete($primaryKey);
     }
 }

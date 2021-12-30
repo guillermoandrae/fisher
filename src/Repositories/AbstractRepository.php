@@ -1,23 +1,15 @@
 <?php
 
-namespace Guillermoandrae\Fisher\Repositories;
+namespace App\Repositories;
 
-use Guillermoandrae\Fisher\Db\AdapterInterface;
+use Guillermoandrae\DynamoDb\Contract\DynamoDbAdapterInterface;
 use Guillermoandrae\Repositories\AbstractRepository as AbstractBaseRepository;
 
 abstract class AbstractRepository extends AbstractBaseRepository
 {
-    /**
-     * @var AdapterInterface The database adapter.
-     */
-    protected AdapterInterface $adapter;
-    
-    /**
-     * Registers the adapter with this object.
-     *
-     * @param AdapterInterface $adapter The adapter.
-     */
-    final public function __construct(AdapterInterface $adapter)
+    protected DynamoDbAdapterInterface $adapter;
+
+    final public function __construct(DynamoDbAdapterInterface $adapter)
     {
         $this->adapter = $adapter;
     }

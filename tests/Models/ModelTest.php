@@ -1,9 +1,9 @@
 <?php
 
-namespace GuillermoandraeTest\Fisher\Models;
+namespace AppTest\Models;
 
+use App\Models\PostModel;
 use PHPUnit\Framework\TestCase;
-use Guillermoandrae\Fisher\Models\PostModel;
 
 final class ModelTest extends TestCase
 {

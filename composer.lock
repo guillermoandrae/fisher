@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b86d234c50fd1d9852d8d9960eaf4996",
+    "content-hash": "b105f179fb7e43d52b636c540e6e56ee",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -241,6 +241,46 @@
                 "source": "https://github.com/guillermoandrae/php-debug/tree/1.0.0"
             },
             "time": "2020-05-31T00:30:58+00:00"
+        },
+        {
+            "name": "guillermoandrae/php-dynamodb",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guillermoandrae/php-dynamodb.git",
+                "reference": "66bd8013303da27fcfc02f759738e8806476abd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guillermoandrae/php-dynamodb/zipball/66bd8013303da27fcfc02f759738e8806476abd6",
+                "reference": "66bd8013303da27fcfc02f759738e8806476abd6",
+                "shasum": ""
+            },
+            "require": {
+                "aws/aws-sdk-php": "^3.95",
+                "guillermoandrae/php-collection": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Guillermoandrae\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP library that can be used to interact with Amazon DynamoDB",
+            "support": {
+                "issues": "https://github.com/guillermoandrae/php-dynamodb/issues",
+                "source": "https://github.com/guillermoandrae/php-dynamodb/tree/2.0.0"
+            },
+            "time": "2021-12-30T03:36:22+00:00"
         },
         {
             "name": "guillermoandrae/php-repository",
