@@ -2,7 +2,8 @@
 
 namespace AppTest\Repositories;
 
-use AppTest\Contracts\AbstractRepositoryTestCase;
+use App\Models\PostModel;
+use AppTest\AbstractRepositoryTestCase;
 use Guillermoandrae\DynamoDb\Constant\AttributeTypes;
 use Guillermoandrae\DynamoDb\Constant\KeyTypes;
 use Guillermoandrae\DynamoDb\Constant\Operators;
@@ -19,6 +20,8 @@ final class PostsRepositoryTest extends AbstractRepositoryTestCase
             'originalAuthor' => 'testing',
             'createdAt' => strtotime('today')
         ];
+
+        /** @var PostModel $result */
         $result = $this->repository->create($data);
         $this->assertEquals($data['originalAuthor'], $result->getOriginalAuthor());
         $this->assertEquals($data['createdAt'], $result->getCreatedAt());
@@ -32,6 +35,8 @@ final class PostsRepositoryTest extends AbstractRepositoryTestCase
             'createdAt' => strtotime('today')
         ];
         $this->repository->create($data);
+
+        /** @var PostModel $result */
         $result = $this->repository->find($data);
         $this->assertEquals($data['originalAuthor'], $result->getOriginalAuthor());
         $this->assertEquals($data['createdAt'], $result->getCreatedAt());

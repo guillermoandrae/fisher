@@ -1,11 +1,11 @@
 <?php
 
-namespace AppTest\Contracts;
+namespace AppTest;
 
+use App\Contracts\DynamoDbRepositoryInterface;
 use Guillermoandrae\DynamoDb\Contract\DynamoDbAdapterInterface;
 use Guillermoandrae\DynamoDb\DynamoDbAdapter;
 use Guillermoandrae\Repositories\RepositoryFactory;
-use Guillermoandrae\Repositories\RepositoryInterface;
 use ICanBoogie\Inflector;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +17,16 @@ abstract class AbstractRepositoryTestCase extends TestCase
 
     protected DynamoDbAdapterInterface $dynamoDbAdapter;
 
-    protected RepositoryInterface $repository;
+    protected DynamoDbRepositoryInterface $repository;
+
+    final public function testGetProperties(): void
+    {
+        $this->assertEquals($this->tableName, $this->repository->getTableName());
+        $this->assertEquals(
+            Inflector::get()->singularize(ucfirst($this->modelName)) . 'Model',
+            explode('\\', $this->repository->getModelName())[2]
+        );
+    }
 
     abstract public function testCreate(): void;
 
@@ -28,10 +37,17 @@ abstract class AbstractRepositoryTestCase extends TestCase
         if (!$this->dynamoDbAdapter->tableExists($this->tableName)) {
             $this->setUpTable();
         }
-        $this->repository = RepositoryFactory::factory(
+        $this->setUpRepository();
+    }
+
+    protected function setUpRepository(): void
+    {
+        /** @var DynamoDbRepositoryInterface $repository */
+        $repository = RepositoryFactory::factory(
             Inflector::get()->pluralize($this->modelName),
             $this->dynamoDbAdapter
         );
+        $this->repository = $repository;
     }
 
     abstract protected function setUpTable(): void;

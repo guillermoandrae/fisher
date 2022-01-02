@@ -2,7 +2,8 @@
 
 namespace AppTest\Repositories;
 
-use AppTest\Contracts\AbstractRepositoryTestCase;
+use App\Models\SongModel;
+use AppTest\AbstractRepositoryTestCase;
 use Guillermoandrae\DynamoDb\Constant\AttributeTypes;
 use Guillermoandrae\DynamoDb\Constant\KeyTypes;
 
@@ -18,6 +19,8 @@ final class SongsRepositoryTest extends AbstractRepositoryTestCase
             'Artist' => 'Common',
             'SongTitle' => 'Resurrection'
         ];
+
+        /** @var SongModel $result */
         $result = $this->repository->create($data);
         $this->assertEquals($data['Artist'], $result->getArtist());
         $this->assertEquals($data['SongTitle'], $result->getSongTitle());

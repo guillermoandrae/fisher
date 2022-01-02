@@ -12,7 +12,7 @@ use ICanBoogie\Inflector;
 use ReflectionClass;
 use ReflectionException;
 
-abstract class AbstractDynamoDbRepository extends AbstractRepository
+abstract class AbstractDynamoDbRepository extends AbstractRepository implements DynamoDbRepositoryInterface
 {
     protected DynamoDbAdapterInterface $adapter;
 
@@ -69,6 +69,22 @@ abstract class AbstractDynamoDbRepository extends AbstractRepository
         return $this->adapter->useTable($this->tableName)->delete($primaryKey);
     }
 
+    final public function getTableName(): string
+    {
+        return $this->tableName;
+    }
+
+    final public function setModelName(string $modelName): static
+    {
+        $this->modelName = $modelName;
+        return $this;
+    }
+
+    final public function getModelName(): string
+    {
+        return $this->modelName;
+    }
+
     private function buildModel(mixed $data): ModelInterface
     {
         $modelName = $this->modelName;
@@ -76,7 +92,7 @@ abstract class AbstractDynamoDbRepository extends AbstractRepository
             $reflectionClass = new ReflectionClass($modelName);
             return $reflectionClass->newInstance($data);
         } catch (ReflectionException $ex) {
-            throw new InvalidModelException('The %s model does not exist', $modelName);
+            throw new InvalidModelException(sprintf('The %s model does not exist', $modelName));
         }
     }
 }
